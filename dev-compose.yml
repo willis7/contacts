@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:9.6.13-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: sion
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: contacts
+    ports:
+      - 5432:5432
+    volumes:
+      - ./contacts.sql:/docker-entrypoint-initdb.d/contacts.sql

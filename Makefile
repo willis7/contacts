@@ -1,9 +1,5 @@
-# I usually keep a `VERSION` file in the root so that anyone
-# can clearly check what's the VERSION of `master` or any
-# branch at any time by checking the `VERSION` in that git
-# revision
 VERSION         :=      $(shell cat ./VERSION)
-IMAGE_NAME      :=      cirocosta/l7
+IMAGE_NAME      :=      willis7/contacts
 
 # As a call to `make` without any arguments leads to the execution
 # of the first target found I really prefer to make sure that this
@@ -26,14 +22,13 @@ install:
 # that's unnecessary. Just `cd`ing to what matters to you is fine - no need to
 # handle the case of directories that you don't want to execute a command.
 test:
-        cd ./lib && go test -v
+        go test -v
 
 # Just like `test`, formatting what matters. As `main.go` is in the root,
 # `go fmt` the root package. Then just `cd` to what matters to you (`vendor`
 # doesn't matter).
-# fmt:
- go fmt
-        cd ./lib && go fmt
+fmt:
+        go fmt
 
 
 # This target is only useful if you plan to also create a Docker image at
@@ -44,7 +39,7 @@ test:
 # having to worry about the retrieval of the binary and execution of it
 # - docker already provides the necessary boundaries.
 image:
-        docker build -t cirocosta/l7 .
+        docker build -t $(IMAGE_NAME) .
 
 
 # This is pretty much an optional thing that I tend to always include.

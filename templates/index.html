@@ -10,6 +10,16 @@
     <body>
         <div class="mw6 center pa3 sans-serif">
             <h1 class="mb4">Contacts</h1>
+            {{range .Contacts}}
+            <div class="pa2 mb3 striped--near-white">
+                <header class="b mb2">{{.Name}}</header>
+                <div class="pl2">
+                    <p class="mb2">{{.Phone }}</p>
+                    <p class="pre mb3">{{.Address}}</p>
+                    <p class="mb2"><span class="fw5">Favorite colors:</span> {{StringsJoin .Favorites.Colors ", "}}</p>
+                </div>
+            </div>
+            {{end}}
         </div>
     </body>
 </html>

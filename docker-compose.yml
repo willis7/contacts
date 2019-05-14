@@ -5,6 +5,16 @@ services:
     image: postgres:9.6.13-alpine
     restart: always
     environment:
+      POSTGRES_USER: sion
       POSTGRES_PASSWORD: example
+      POSTGRES_DB: contacts
     volumes:
       - ./contacts.sql:/docker-entrypoint-initdb.d/contacts.sql
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://sion:example@db/contacts"
+    ports:
+      - '8080:8080'
